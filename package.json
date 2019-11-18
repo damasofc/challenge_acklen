@@ -1,0 +1,33 @@
+{
+  "name": "challenge_acklen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -t 5000 test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damasofc/challenge_acklen.git"
+  },
+  "keywords": [
+    "selenium",
+    "javascript",
+    "mocha",
+    "chai"
+  ],
+  "author": "damasofc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damasofc/challenge_acklen/issues"
+  },
+  "homepage": "https://github.com/damasofc/challenge_acklen#readme",
+  "dependencies": {
+    "mocha": "^6.2.2",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1"
+  }
+}
