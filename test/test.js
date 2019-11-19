@@ -55,6 +55,55 @@ describe('Parking Cost Calculator Tests', () => {
 
 
       });
+
+      it('Short-Term Parking Rates', async () => {
+        await page.selectParkingLot('Short');
+        await page.setInitDay(17,11,2019);
+        await page.setLeaveDay(17,11,2019);
+        await page.setStartTime(15,30);
+        await page.setLeaveTime(16,30);
+        await page.clickCalculate();
+        let price = await page.getParkingCost()
+        var timeElapsed = await page.getDuration();
+        price.should.equal(2);
+        timeElapsed.days.should.equal(0);
+        timeElapsed.hours.should.equal(1);
+        timeElapsed.minutes.should.equal(0);
+
+
+        await page.selectParkingLot('Short');
+        await page.setLeaveTime(16,31);
+        await page.clickCalculate();
+        price = await page.getParkingCost()
+        timeElapsed = await page.getDuration();
+        price.should.equal(3);
+        timeElapsed.days.should.equal(0);
+        timeElapsed.hours.should.equal(1);
+        timeElapsed.minutes.should.equal(1);
+
+        await page.selectParkingLot('Short');
+        await page.setLeaveDay(18,11,2019);
+        await page.clickCalculate();
+        price = await page.getParkingCost();
+        timeElapsed = await page.getDuration();
+        price.should.equal(27);
+        timeElapsed.days.should.equal(1);
+        timeElapsed.hours.should.equal(1);
+        timeElapsed.minutes.should.equal(1);
+
+        await page.selectParkingLot('Short');
+        await page.setLeaveDay(18,11,2019);
+        await page.setLeaveTime(17,01);
+        await page.clickCalculate();
+        price = await page.getParkingCost();
+        timeElapsed = await page.getDuration();
+        price.should.equal(28);
+        timeElapsed.days.should.equal(1);
+        timeElapsed.hours.should.equal(1);
+        timeElapsed.minutes.should.equal(31);
+
+
+    });
       
   })
 
