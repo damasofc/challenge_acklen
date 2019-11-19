@@ -29,6 +29,8 @@ describe('Parking Cost Calculator Tests', () => {
           await page.setLeaveTime(22,30);
           await page.clickCalculate();
           console.log(await page.getParkingCost());
+          var timeElapsed = await page.getDuration();
+          console.log(timeElapsed.hours);
 
 
       });
