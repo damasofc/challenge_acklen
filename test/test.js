@@ -227,7 +227,73 @@ describe('Parking Cost Calculator Tests', () => {
     timeElapsed = await page.getDuration();
     price.should.equal(122);
     expect(timeElapsed).to.eql(elapsed(14,0,1))
-});
+  });
+
+  it('Long-Term Garage Parking Rates', async () => {
+    await page.selectParkingLot('Long-Garage');
+    await page.setInitDay(17,11,2019);
+    await page.setLeaveDay(17,11,2019);
+    await page.setStartTime(15,30);
+    await page.setLeaveTime(16,00);
+    await page.clickCalculate();
+    let price = await page.getParkingCost()
+    var timeElapsed = await page.getDuration();
+    price.should.equal(2);
+    expect(timeElapsed).to.eql(elapsed(0,0,30))
+
+
+    await page.selectParkingLot('Long-Garage');
+    await page.setLeaveTime(16,31);
+    await page.clickCalculate();
+    price = await page.getParkingCost()
+    timeElapsed = await page.getDuration();
+    price.should.equal(4);
+    expect(timeElapsed).to.eql(elapsed(0,1,1))
+
+    await page.selectParkingLot('Long-Garage');
+    await page.setLeaveDay(18,11,2019);
+    await page.clickCalculate();
+    price = await page.getParkingCost();
+    timeElapsed = await page.getDuration();
+    price.should.equal(16);
+    expect(timeElapsed).to.eql(elapsed(1,1,1))
+
+    await page.selectParkingLot('Long-Garage');
+    await page.setLeaveDay(18,11,2019);
+    await page.setLeaveTime(09,00);
+    await page.clickCalculate();
+    price = await page.getParkingCost();
+    timeElapsed = await page.getDuration();
+    price.should.equal(12);
+    expect(timeElapsed).to.eql(elapsed(0,17,30))
+
+    await page.selectParkingLot('Long-Garage');
+    await page.setLeaveDay(24,11,2019);
+    await page.setLeaveTime(15,30);
+    await page.clickCalculate();
+    price = await page.getParkingCost();
+    timeElapsed = await page.getDuration();
+    price.should.equal(72);
+    expect(timeElapsed).to.eql(elapsed(7,0,0))
+
+    await page.selectParkingLot('Long-Garage');
+    await page.setLeaveDay(24,11,2019);
+    await page.setLeaveTime(15,31);
+    await page.clickCalculate();
+    price = await page.getParkingCost();
+    timeElapsed = await page.getDuration();
+    price.should.equal(74);
+    expect(timeElapsed).to.eql(elapsed(7,0,1))
+
+    await page.selectParkingLot('Long-Garage');
+    await page.setLeaveDay(31,11,2019);
+    await page.setLeaveTime(15,31);
+    await page.clickCalculate();
+    price = await page.getParkingCost();
+    timeElapsed = await page.getDuration();
+    price.should.equal(146);
+    expect(timeElapsed).to.eql(elapsed(14,0,1))
+  });
       
-  })
+})
 
