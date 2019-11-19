@@ -16,7 +16,7 @@ function elapsed(d,h,m){
   });
 }
 
-describe('Parking Cost Calculator Tests', () => {
+describe('Parking Cost and Time Elapsed Tests', () => {
         let page;
         before( async () => {
           page = await new HomePage();
@@ -292,7 +292,7 @@ describe('Parking Cost Calculator Tests', () => {
     price = await page.getParkingCost();
     timeElapsed = await page.getDuration();
     price.should.equal(146);
-    expect(timeElapsed).to.eql(elapsed(14,0,1))
+    expect(timeElapsed).to.eql(elapsed(14,0,1));
   });
       
 })
