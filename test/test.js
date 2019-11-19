@@ -19,17 +19,17 @@ describe('Parking Cost Calculator Tests', () => {
         after( async () => {
           await page.quit();
         });
-      
-        it('Has Text', async () => {
-            var res = await page.hasTextElements();
-            res.should.be.a('number');
-  
-        });
 
         it('Selected Element', async () => {
           await page.selectParkingLot('Economy');
           var res = await page.getSelectedParkingLot();
-          res.should.equal('Economy');
+          await page.setInitDay(17,11,2019);
+          await page.setLeaveDay(17,11,2019);
+          await page.setStartTime(18,30);
+          await page.setLeaveTime(22,30);
+          await page.clickCalculate();
+          console.log(await page.getParkingCost());
+
 
       });
       
