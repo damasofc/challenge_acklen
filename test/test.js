@@ -25,6 +25,13 @@ describe('Parking Cost Calculator Tests', () => {
             res.should.be.a('number');
   
         });
+
+        it('Selected Element', async () => {
+          await page.selectParkingLot('Economy');
+          var res = await page.getSelectedParkingLot();
+          res.should.equal('Economy');
+
+      });
       
   })
 
