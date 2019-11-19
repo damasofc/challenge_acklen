@@ -20,17 +20,38 @@ describe('Parking Cost Calculator Tests', () => {
           await page.quit();
         });
 
-        it('Selected Element', async () => {
-          await page.selectParkingLot('Economy');
-          var res = await page.getSelectedParkingLot();
+        it('Valet Parking Rates', async () => {
+          await page.selectParkingLot('Valet');
           await page.setInitDay(17,11,2019);
           await page.setLeaveDay(17,11,2019);
-          await page.setStartTime(18,30);
-          await page.setLeaveTime(22,30);
+          await page.setStartTime(15,30);
+          await page.setLeaveTime(20,30);
           await page.clickCalculate();
-          console.log(await page.getParkingCost());
+          let price = await page.getParkingCost()
           var timeElapsed = await page.getDuration();
-          console.log(timeElapsed.hours);
+          price.should.equal(12);
+          timeElapsed.days.should.equal(0);
+          timeElapsed.hours.should.equal(5);
+          timeElapsed.minutes.should.equal(0);
+
+
+          await page.setLeaveTime(20,31);
+          await page.clickCalculate();
+          price = await page.getParkingCost()
+          timeElapsed = await page.getDuration();
+          price.should.equal(18);
+          timeElapsed.days.should.equal(0);
+          timeElapsed.hours.should.equal(5);
+          timeElapsed.minutes.should.equal(1);
+
+          await page.setLeaveDay(18,11,2019);
+          await page.clickCalculate();
+          price = await page.getParkingCost();
+          timeElapsed = await page.getDuration();
+          price.should.equal(36);
+          timeElapsed.days.should.equal(1);
+          timeElapsed.hours.should.equal(5);
+          timeElapsed.minutes.should.equal(1);
 
 
       });
