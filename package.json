@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -t 10000 test"
+    "test": "mocha -t 10000 test",
+    "reports": "mocha -t 10000 test --reporter mochawesome --reporter-options autoOpen=true"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/damasofc/challenge_acklen#readme",
   "dependencies": {
     "mocha": "^6.2.2",
+    "mochawesome": "^4.1.0",
     "selenium-webdriver": "^4.0.0-alpha.5"
   },
   "devDependencies": {

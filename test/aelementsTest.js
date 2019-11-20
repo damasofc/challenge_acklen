@@ -1,5 +1,4 @@
 const {Builder, By, Key, until} = require('selenium-webdriver');
-const {suite} = require('selenium-webdriver/testing');
 
 var chai = require('chai');
 var should = chai.should();
@@ -8,6 +7,7 @@ var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var HomePage = require('../lib/HomePage');
+
 
 describe('Elements Tests', () => {
         let page;
@@ -45,7 +45,7 @@ describe('Elements Tests', () => {
 
       });
 
-      it('Dates Input accepts only numbers or \'/\' ', async () => {
+      it('Dates Input should accepts only numbers or \'/\' ', async () => {
         let dayInit = {d: 17, m: 'once', y: 2019};
         let startAndEndTime = {h:15, m:30};
         await page.setInitDay(dayInit.d,dayInit.m,dayInit.y);
@@ -62,7 +62,7 @@ describe('Elements Tests', () => {
 
       });
 
-      it('Dates Input accepts only valids Days and Month', async () => {
+      it('Dates Input should accepts only valids Days and Month', async () => {
         let dayInit = {d: 55, m: 20, y: 2019};
         let startAndEndTime = {h:15, m:30};
         await page.setInitDay(dayInit.d,dayInit.m,dayInit.y);
@@ -81,7 +81,7 @@ describe('Elements Tests', () => {
 
       });
 
-      it('Hour Input accepts only numbers or \':\' ', async () => {
+      it('Hour Input should accepts only numbers or \':\' ', async () => {
         let dayInit = {d: 17, m: 11, y: 2019};
         let startAndEndTime = {h:15, m:'30A'};
         await page.setInitDay(dayInit.d,dayInit.m,dayInit.y);
@@ -97,7 +97,7 @@ describe('Elements Tests', () => {
 
       });
 
-      it('Hour Input accepts only valids hours and minutes', async () => {
+      it('Hour Input should accepts only valids hours and minutes', async () => {
         let dayInit = {d: 55, m: 20, y: 2019};
         let startAndEndTime = {h:50, m:96};
         await page.setInitDay(dayInit.d,dayInit.m,dayInit.y);
@@ -115,6 +115,30 @@ describe('Elements Tests', () => {
         }
 
       });
+
+        it('Setting a leaving date or hour before the starting date should show an error', async () => {
+          let dayInit = {d: 17, m: 11, y: 2019};
+          let startAndEndTime = {h:15, m:30};
+          await page.setInitDay(dayInit.d,dayInit.m,dayInit.y);
+          await page.setLeaveDay(dayInit.d - 1,dayInit.m,dayInit.y);
+          await page.setStartTime(startAndEndTime.h,startAndEndTime.m);
+          await page.setLeaveTime(startAndEndTime.h,startAndEndTime.m);
+          await page.clickCalculate();
+
+          await page.showError(r => { 
+            expect(r,"Error: It doesn't shows the error (DATE)").to.be.true;
+          });
+
+          await page.setLeaveDay(dayInit.d,dayInit.m,dayInit.y);
+          await page.setLeaveTime(startAndEndTime.h -1 ,startAndEndTime.m);
+          await page.clickCalculate();
+          await page.showError(r => {
+            expect(r,"Error: It doesn't shows the error (HOUR)").to.be.true;
+          });
+
+        });
+      
+
 
       
 })
