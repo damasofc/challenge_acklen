@@ -1,7 +1,11 @@
 ## Challenge QA Automation - Damaso Fernandez
 
+### Pre-Requisites:
+ 1. NodeJs
+ 2. npm
 
-Steps to run the tests:
+
+### Steps to run the tests:
 
  1. Download the repo: ` git clone https://github.com/damasofc/challenge_acklen ` 
  2.  navigate to folder: `cd challenge_acklen`
