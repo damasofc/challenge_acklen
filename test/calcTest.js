@@ -20,7 +20,7 @@ async function checkCost(type,page){
   await page.selectParkingLot(type);
   await page.clickCalculate();      
   let cost = await page.getParkingCost();
-  cost.should.be.equal(0,`${type}Entering the same date and hour for the entry and leaving generate a cost`);
+  cost.should.be.equal(0,`(${type}) Entering the same date and hour for the starting and leaving, generate a cost`);
 }
 
 describe('Parking Cost and Time Elapsed Tests', () => {
@@ -35,7 +35,7 @@ describe('Parking Cost and Time Elapsed Tests', () => {
           await page.quit();
         });
 
-        it('Input the same Entry and Leaving date and same entry and leaving hour, should print 0 cost ', async () => {
+        it('Entering the same Entry and Leaving date and same entry and leaving hour, should print 0 cost ', async () => {
           let dayInit = {d: 55, m: 20, y: 2019};
           let startAndEndTime = {h:50, m:96};
           await page.setInitDay(dayInit.d,dayInit.m,dayInit.y);
